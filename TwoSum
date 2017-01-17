@@ -1,0 +1,21 @@
+public class Solution {
+   public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
+        int[] result = new int[2];
+       
+        for (int i = 0; i < nums.length; i++) {
+             myMap.put(nums[i],i);
+         }
+       
+        for (int i = 0; i < nums.length; i++) {
+            Integer v = myMap.get(target-nums[i]);   //if there is no v in nums, v will be null;if there is, v will be the index
+            if (v != null && v > i) {  //guarantee that v exists and not itself
+                 result[0]=i;
+                 result[1]=v;
+                 return result;
+             }
+         }
+    
+    return null;
+    }
+}
