@@ -1,23 +1,27 @@
+import java.util.*;
+
 public class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        if(s.length()==0){
-            return 0;
-        }
-        else{
-            int max=0,max1=0;
-            HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-            for(int i=0,j=0;i<s.length();i++){   //i and j are the head pointer and the tail pointer of the "dynamic window" which scan the string s from left to right. 
-                if(map.containsKey(s.charAt(i))){
-                    max1 = i-j;
-                    j=i;
-                    map.clear();
-                }
-                map.put(s.charAt(i), i);
-                if(max1>max){
-                    max = max1;
-                }    
+
+   public int lengthOfLongestSubstring(String s) {
+        if (s.length()==0) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max=0;
+        for (int i=0, j=0; i<s.length(); i++){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1);
             }
-            return max;
+            else{
+                map.put(s.charAt(i),i);
+                max = Math.max(max,i-j+1);
+            }
         }
+        return max;
+    }
+
+    public static void main(String[] args){
+        String s = "tmm";
+        Solution ss = new Solution();
+        int n = ss.lengthOfLongestSubstring(s);
+        System.out.println(n);
     }
 }
