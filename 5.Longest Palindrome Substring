@@ -1,0 +1,28 @@
+public class Solution {
+    
+    int low=0;
+    int maxlen=0;
+    
+    public String longestPalindrome(String s) {
+        if(s.length()<=1){
+            return s;
+        }
+        else{
+            for(int i=0;i<s.length()-1;i++){  //i<s.length()-1, cause in even case, we need a parameter i+1
+                extendPalindrome(s, i, i); // assume the palindrome length is odd
+                extendPalindrome(s, i, i+1); //assume the palindrome length is even
+            }
+        }
+        return s.substring(low,low+maxlen);
+    }
+    public void extendPalindrome(String s, int j, int k){
+        while(j>=0&&k<s.length()&&s.charAt(j)==s.charAt(k)){
+            j--;
+            k++;
+        }
+        if(maxlen<k-j-1){
+            low=j+1;
+            maxlen=k-j-1;   
+        }
+    }
+}
