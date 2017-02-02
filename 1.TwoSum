@@ -8,8 +8,10 @@ public class Solution {
          }
        
         for (int i = 0; i < nums.length; i++) {
-            Integer v = myMap.get(target-nums[i]);   //if there is no v in nums, v will be null;if there is, v will be the index
-            if (v != null && v > i) {  //guarantee that v exists and not itself
+            Integer v = myMap.get(target-nums[i]);   //if there is no such number in nums, v will be null;if there is, v will be the index
+            if (v != null && v > i) {  //guarantee that v exists, and we also need to guarantee that the matched number (num[v]) 
+                                       //is behind the num[i], otherwise there will be twice satisfication the condition in the while loop,
+                                       //but the numbers are same, just the positions are swapped. 
                  result[0]=i;
                  result[1]=v;
                  return result;
