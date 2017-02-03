@@ -1,0 +1,30 @@
+public class Solution {
+    public String convert(String s, int numRows) {
+        char[] c = s.toCharArray();
+        int len = s.length();
+        if(numRows<=1){
+            return s;
+        }
+        else{
+            StringBuffer[] sb = new StringBuffer[numRows];
+            for(int i=0;i<numRows;i++){
+                sb[i] = new StringBuffer();
+            }
+            int j=0;
+            while(j<len){
+                for(int p=0;p<numRows&&j<len;p++){  //must have the condition of j<len, otherwise the array c will out of bound
+                    sb[p].append(c[j]);
+                    j++;
+                }
+                for(int q=numRows-2;q>=1&&j<len;q--){ //must have the condition of j<len, otherwise the array c will out of bound
+                    sb[q].append(c[j]);
+                    j++;
+                }
+            }
+            for(int n=1;n<numRows;n++){
+                sb[0].append(sb[n]);
+            }
+            return sb[0].toString();
+        }
+    }
+}
