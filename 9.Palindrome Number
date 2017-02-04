@@ -1,0 +1,38 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        String xstr= x+"";
+        int len = xstr.length();
+        if(len==0){
+            return false;
+        }
+        else{
+            if(len%2==0){   //even length
+                int i=(len-1)/2; 
+                int j=(len-1)/2+1;
+                while(i>=0&&j<=len-1){
+                    if(xstr.charAt(i)==xstr.charAt(j)){
+                        i--;
+                        j++;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
+            else if(len%2==1){   //odd length
+                int i=(len-1)/2;
+                int j=(len-1)/2;
+                while(i>=0&&j<=len-1){
+                    if(xstr.charAt(i)==xstr.charAt(j)){
+                        i--;
+                        j++;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
