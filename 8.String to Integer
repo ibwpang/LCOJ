@@ -1,0 +1,43 @@
+public class Solution {
+    public int myAtoi(String str) {
+        //if we use Integer.parseInt() or sth like that, we cannot detect the overflow of MAX_INTEGER and MIN_INTEGER. We need cast the characters from string to int one by one, when overflow occur, the program will return MAX_INTEGER or MIN_INTEGER.
+        if(str.length()==0||str==null){
+            return 0;
+        }
+        else{
+            str = str.trim(); 
+            long sum=0;  //sum should be long type
+            int sign=1;
+            int i=0;
+            
+            if(str.charAt(0)=='+'){
+                sign=1;
+                i++;
+            }
+            else if(str.charAt(0)=='-'){
+                sign=-1;
+                i++;
+            }
+            else{
+                sign=1;
+            }
+            
+            while(i<str.length()){
+                if(!Character.isDigit(str.charAt(i))){
+                    return (int)sum*sign;
+                }
+                else{
+                    sum = sum*10+(str.charAt(i)-'0');
+                    if(sum>Integer.MAX_VALUE&&sign==1){  //the sum here shouldn't be convert to int, because we need long type value to compare with the Integer.MAX_VALUE. We also must have another condition: the sign is positive or negative, because when we return, we must return Integer.MAX_VALUE or Integer.MIN_VALUE, if you just want to be convinient and just return (int)sum*sign, it will be wrong.
+                        return Integer.MAX_VALUE ;
+                    }
+                    else if(sum>Integer.MAX_VALUE&&sign==-1){
+                        return Integer.MIN_VALUE ;
+                    }
+                    i++;
+                }
+            }
+            return (int)sum*sign;
+        }
+    }
+}
