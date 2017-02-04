@@ -36,3 +36,15 @@ public class Solution {
         return true;
     }
 }
+
+
+//using the method of reversing the int x, you need to consider the overflow, because the reverse of the int x may overflow. But the code below don't need, because it just compare half of the int x
+public boolean isPalindrome(int x) {
+    if (x<0 || (x!=0 && x%10==0)) return false;
+    int rev = 0;
+    while (x>rev){
+    	rev = rev*10 + x%10;
+    	x = x/10;
+    }
+    return (x==rev || x==rev/10); // the notion is that i don't care whether it is parlindrome, I reverse half of the x firstly, and then I compare the first half and the reversed second half.
+}
