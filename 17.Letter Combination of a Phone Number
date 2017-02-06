@@ -1,0 +1,20 @@
+public class Solution {
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> ans = new LinkedList<String>();
+        String[] mapping = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        if(digits.length()==0){
+            return ans;
+        }
+        ans.add("");  //avoid return null when use peek() method.
+        for(int i=0; i<digits.length();i++){  //for each digit in "digits"
+            int x = digits.charAt(i)-'0'; //or: int x = Character.getNumericValue(digits.charAt(i));
+            while(ans.peek().length()==i){ //it is a trick, the length of the head element of ans in this loop of "for" equals to the i coincidental. It is this while loop implements a FIFO queue to add new character-combined elements at tail and remove old elements from head.
+                String t = ans.remove(); //get the head element and remove it from the queue.
+                for(char s : mapping[x].toCharArray()){ //get each character in mapping[x]
+                    ans.add(t+s);   //add t+s as a new character-combined elements
+                }
+            }
+        }
+       return ans; 
+    } 
+}
