@@ -1,3 +1,12 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+
 //Two pass
 public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode dummy = new ListNode(0);
@@ -19,3 +28,20 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 }
 
 //one pass
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);  //create a dummy node
+        dummy.next = head;   //make the dummy point to the first node of the linked list
+        ListNode first = dummy;  //caution:here is first=dummy, not first=head.
+        ListNode second = dummy;
+        for(int i=1; i<=n+1;i++){ //we need from 1 to n+1, cause first is just the dummy, not the first node of the list.
+            first = first.next;  //advance the first pointer to (n+1) ahead from the first one node.
+        }
+        while(first!=null){  //here should be first itself not null, instead of first.next, cause when it is first.next, when the first get to the last node of the list, the second will stop, but now the second only get to n+2 th node from the end of the list.
+            first = first.next;
+            second = second.next;
+        }
+        second.next=second.next.next;
+        return dummy.next;
+    }
+}
