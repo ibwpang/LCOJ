@@ -1,0 +1,26 @@
+public class Solution {
+    public boolean isValid(String s) {
+        if(s.length()==0){
+            return false;
+        }
+        else{
+            Stack<Character> stack = new Stack<Character>();
+            char[] ch = s.toCharArray();
+            for(int i=0;i<ch.length;i++){
+                if(ch[i]=='('){
+                    stack.push(')');
+                }
+                else if(ch[i]=='['){
+                    stack.push(']');
+                }
+                else if(ch[i]=='{'){
+                    stack.push('}');
+                }
+                else if(stack.isEmpty()||stack.pop()!=ch[i]){  //we still need to have the judge of stack.isEmpty(), cause if is ']', then we will not have anything is stack, so when the stack is empty, there will be exception if we call stack.pop().
+                    return false;
+                }
+            }
+            return stack.isEmpty();  //cannot just return true here, the s may like "[".
+        } 
+    }
+}
