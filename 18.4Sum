@@ -1,3 +1,5 @@
+//Time complexity is O(n^3), and space complexity is O(1)
+
 public class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList<>();
@@ -5,6 +7,9 @@ public class Solution {
             return res;
         }
         Arrays.sort(nums);
+        if(4*nums[0]>target||4*nums[nums.length-1]<target){
+            return res;
+        }
         for(int i=0;i<nums.length-3;i++){
             if(i>0&&nums[i]==nums[i-1]){
                continue; 
@@ -15,7 +20,7 @@ public class Solution {
                         continue;
                     }
                     int low=j+1;
-                    int high=nums[nums.length-1];
+                    int high=nums.length-1;
                     while(low<high){
                         if(nums[i]+nums[j]+nums[low]+nums[high]==target){  //in 3sum, this target is 0.
                             res.add(Arrays.asList(nums[i],nums[j],nums[low],nums[high]));
@@ -25,6 +30,8 @@ public class Solution {
                             while(low<high&&nums[high]==nums[high-1]){
                                 high--;
                             }
+                            low++;    //don't forget these two lines of code.
+                            high--;
                         }
                         else if(nums[i]+nums[j]+nums[low]+nums[high]<target){
                             low++;
