@@ -33,7 +33,7 @@ public class Solution {
         ListNode dummy = new ListNode(0);  //create a dummy node
         dummy.next = head;   //make the dummy point to the first node of the linked list
         ListNode first = dummy;  //caution:here is first=dummy, not first=head.
-        ListNode second = dummy;    //?THE "FIRST" "SECOND" WE DEFINED HERE IS CALL POINTERS, THEY ARE NOT LINKEDLISTS, THEY JUST GO INTO THE LINKEDLIST OF DUMMY.NEXT AND DO SOME OPERATION, THE LINKEDLIST ITSELF CAN STILL BE RETURNED BY DUMMY.NEXT
+        ListNode second = dummy;    //--!!--THE "FIRST" "SECOND" WE DEFINED HERE IS CALL POINTERS, THEY ARE NOT LINKEDLISTS, THEY JUST GO INTO THE LINKEDLIST OF DUMMY.NEXT AND DO SOME OPERATION, THE LINKEDLIST ITSELF CAN STILL BE RETURNED BY DUMMY.NEXT
         for(int i=1; i<=n+1;i++){ //we need from 1 to n+1, cause first is just the dummy, not the first node of the list.
             first = first.next;  //advance the first pointer (n+1) times, makes it n+1 ahead from the dummy node.
         }
