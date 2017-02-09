@@ -17,4 +17,4 @@ public class Solution {
     }
 }
 
-//KMT algorithm
+//KMP algorithm - sting searching algorithm with O(n)
