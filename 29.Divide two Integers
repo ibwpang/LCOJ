@@ -1,0 +1,89 @@
+//We are moving with stride of divisor 1, 2, 4, 8, 16...2^n for performance reason
+public class Solution {
+    public int divide(int dividend, int divisor) {
+        int sign = 1;
+        if((dividend<0&&divisor>0)||(dividend>0&&divisor<0)){
+            sign = -1;
+        }
+        
+        long ldend = Math.abs((long)dividend);
+        long ldsor = Math.abs((long)divisor);
+        
+        if(ldsor==0){
+            return Integer.MAX_VALUE;
+        }
+        if((ldend<ldsor)||(ldend==0)){
+            return 0;
+        }
+        long lans = ldivide(ldend,ldsor);
+        int ans;
+        if(lans>Integer.MAX_VALUE){
+            ans = (sign==1)?Integer.MAX_VALUE:Integer.MIN_VALUE;
+        }
+        else{
+            ans = (int)(sign*lans);
+        }
+        return ans;
+    }
+    
+    public long ldivide(long ldend, long ldsor){
+        if(ldend<ldsor){
+            return 0;
+        }
+        long sum=ldsor;
+        long times=1;
+        while((sum+sum)<=ldend){
+            sum+=sum;
+            times+=times;
+        }
+        return times+ldivide(ldend-sum,ldsor);
+    }
+}
+
+
+
+
+//If we are moving with stride 1, 2, 3, 4...n, No recursion used, will lead to time limit exceed
+public class Solution {
+    public int divide(int dividend, int divisor) {
+	//Reduce the problem to positive long integer to make it easier.
+	//Use long to avoid integer overflow cases.
+	int sign = 1;
+	if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0))
+		sign = -1;
+	long ldividend = Math.abs((long) dividend);
+	long ldivisor = Math.abs((long) divisor);
+	
+	//Take care the edge cases.
+	if (ldivisor == 0) return Integer.MAX_VALUE;
+	if ((ldividend == 0) || (ldividend < ldivisor))	return 0;
+	
+	long lans = ldivide(ldividend, ldivisor);
+	
+	int ans;
+	if (lans > Integer.MAX_VALUE){ //Handle overflow.
+		ans = (sign == 1)? Integer.MAX_VALUE : Integer.MIN_VALUE;
+	} else {
+		ans = (int) (sign * lans);
+	}
+	return ans;
+}
+
+private long ldivide(long ldividend, long ldivisor) {
+	// Recursion exit condition
+	if (ldividend < ldivisor) return 0;
+	
+	//  Find the largest multiple so that (divisor * multiple <= dividend), 
+	//  whereas we are moving with stride 1, 2, 4, 8, 16...2^n for performance reason.
+	//  Think this as a binary search.
+	long sum = ldivisor;
+	long sumall = ldivisor;
+	long multiple = 1;
+	while ((sumall+sum) <= ldividend) {
+		sumall += sum;
+		multiple += 1;
+	}
+	//Look for additional value for the multiple from the reminder (dividend - sum) recursively.
+	return multiple;
+}
+}
