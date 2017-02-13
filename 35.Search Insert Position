@@ -1,3 +1,4 @@
+//Binary search, Can handle duplications
 public class Solution {
     public int searchInsert(int[] nums, int target) {
         if(nums.length==0){
@@ -9,7 +10,7 @@ public class Solution {
         while(i<=j){
             mid = (i+j)/2;
             if(target==nums[mid]){
-                return mid;
+                return mid;   //return mid when find
             }
             else if(target<nums[mid]){
                 j=mid-1;
@@ -18,6 +19,6 @@ public class Solution {
                 i=mid+1;
             }
         }
-        return i;
+        return i;   //return i when not find
     }
 }
