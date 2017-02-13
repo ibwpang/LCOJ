@@ -1,0 +1,21 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for(int i=0;i<board[0].length;i++){
+            HashSet<Character> row = new HashSet<Character>();
+            HashSet<Character> col = new HashSet<Character>();
+            HashSet<Character> cube = new HashSet<Character>();
+            for(int j=0;j<board[0].length;j++){
+                if(board[i][j]!='.'&&!row.add(board[i][j])){ //check is there any replication number in a row
+                    return false;
+                }
+                if(board[j][i]!='.'&&!col.add(board[j][i])){ //check is there any replication number in a col
+                    return false;
+                }
+                if(board[3*(i/3)+j/3][3*(i%3)+j%3]!='.'&&!cube.add(board[3*(i/3)+j/3][3*(i%3)+j%3])){ //check is there any replication number in a cube
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
