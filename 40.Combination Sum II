@@ -1,0 +1,32 @@
+public class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(candidates);
+        backtrack(list, new ArrayList<Integer>(), candidates, target, 0);
+        return list;
+    }
+    
+    public void backtrack(List<List<Integer>> list, ArrayList<Integer> templist, int[] nums, int remain, int start){
+        if(remain<0){
+            return;
+        }
+        else if(remain==0){
+            // for(List<Integer> l : list){
+            //     if(l==templist){
+            //         return;
+            //     }
+            // }
+            list.add(new ArrayList<Integer>(templist)); //why new a new object?
+            return;
+        }
+        else{
+            for(int i=start;i<nums.length;i++){
+                if(i>start&&nums[i]==nums[i-1]){continue;}//check when the templist just have one element and this element will be change to next element in candidates.
+                    templist.add(nums[i]);
+                    backtrack(list, templist, nums, remain-nums[i], i+1);//cannot use same element, start = i+1
+                    templist.remove(templist.size()-1);
+            }
+            return;
+        }
+    }
+}
