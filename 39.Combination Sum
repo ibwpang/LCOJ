@@ -7,7 +7,7 @@ public class Solution {
         return list;
     }
     
-    public void backtrack(List<List<Integer>> list, List<Integer> templist, int[] nums, int remain, int start){
+    public void backtrack(List<List<Integer>> list, List<Integer> templist, int[] nums, int remain, int start){ //list is reference pass, and the templist refers to a new object
         //templist is used for storing each kind of combination.
         if(remain<0){ //this is the condition of the backtrack
             return;
