@@ -1,0 +1,25 @@
+public class Solution {
+    public String multiply(String num1, String num2) {
+        int m = num1.length();
+        int n = num2.length();
+        int[] res = new int[m+n];
+        for(int i=m-1;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
+                int subres = (num1.charAt(i)-'0')*(num2.charAt(j)-'0');
+                int p1=i+j;
+                int p2=i+j+1;
+                subres+=res[p2]; //added here can help us to avoid to consider the carry bit and carry in our program. 
+                res[p1]+=subres/10;  //in this way, the carry bit on the i+j bit also will not need us to carry in our program.
+                res[p2]=subres%10;
+            }
+        }
+        StringBuffer sb = new StringBuffer();
+        for(int p=0;p<res.length;p++){
+            if(res[p]==0&&sb.length()==0){
+            }
+            else
+                sb.append(res[p]);
+        }
+        return sb.length()==0?"0":sb.toString();
+    }
+}
