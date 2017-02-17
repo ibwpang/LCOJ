@@ -49,16 +49,16 @@ public class Solution {
        if(n==0){
            return 1;
        }
-       res = myPow(res,n/2);
-       if(n%2==0){
+       res = myPow(res,n/2);   //so far we don't need to care the n is even or odd, positive or negative.
+       if(n%2==0){  //n is even, n/2 will lead to ^-1, so it is fine when n is negative.
            return res*res;
        }
-       else{
+       else{        //when n is odd, there are some different between n is positive and negative. When n is negative, we cannot just simply times x at the result anymore, what we should multiply is 1/x.
            if(n>0){ //n is odd and positive
                return x*res*res;
            }
            else{    //n is odd and negative
-               return (1/x)*res*res;//the two res are calculated by the power with sign, so x should be calculated by power with sign -1 as well. 
+               return (1/x)*res*res;   //the two res are calculated by the power with sign, so x should be calculated by power with sign -1 as well. 
            }
         }
         
