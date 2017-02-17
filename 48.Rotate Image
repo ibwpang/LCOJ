@@ -1,0 +1,20 @@
+public class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        if(n==0){
+            return;
+        }
+        for(int layer=0;layer<n/2;layer++){
+            int first = layer;
+            int last = n-1-layer;
+            for(int i=first;i<last;i++){
+                int offset = i-first;
+                int temp = matrix[first][i]; //row index is constant
+                matrix[first][i]=matrix[last-offset][first]; // column index is constant
+                matrix[last-offset][first]=matrix[last][last-offset];//row index is constant
+                matrix[last][last-offset]=matrix[i][last];//column index is constant
+                matrix[i][last]=temp;
+            }
+        }
+    }
+}
