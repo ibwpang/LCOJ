@@ -1,4 +1,4 @@
-//----------------backtrack----------------submitted version--------------
+//----------------backtrack----------------submitted version 1 boolean[] bitsmap--------------
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
@@ -30,6 +30,41 @@ public class Solution {
         return;
     }
 }
+
+//----------------backtrack----------------submitted version 2 int[] bitsmap--------------
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        if(nums.length==0){
+            return list;
+        }
+        Arrays.sort(nums); 
+        int[] bits = new int[nums.length];
+        backtrack(list, new ArrayList<Integer>(), nums, bits);
+        return list;
+    }
+    
+    public void backtrack(List<List<Integer>> list, ArrayList<Integer> templist, int[] nums, int[] bits){
+        if(templist.size()==nums.length){
+                list.add(new ArrayList<Integer>(templist));
+                return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(bits[i]!=0||i>0&&nums[i]==nums[i-1]&&bits[i-1]==0){  // the condition before the || is normal, let us see the condition after ||. i>0 and nums[i]==nums[i-1] are easy to understand, the tricky one is bits[i-1]==0, it means when I set a value in templist, the value (just one bit before it) which is already in the templist should have a non-zero bits flag, because it means I go to that further step by step. But when the value (just one bit before it) which is already in the templist have a zero bits flag, it means I have already used that bit before, and now the bits flag of it has already been cleaned.so if we use it again, we must have duplicated templists.
+                continue;
+            }
+            else if(bits[i]==0){
+                templist.add(nums[i]);
+                bits[i]++;
+                backtrack(list, templist, nums, bits);
+                templist.remove(templist.size()-1);
+                bits[i]=0;
+            }
+        }
+        return;
+    }
+}
+
 //--------------------time limit exceeded----------------------
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
