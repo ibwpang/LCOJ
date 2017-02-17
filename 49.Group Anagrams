@@ -1,0 +1,19 @@
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs.length==0||strs==null){
+            return new ArrayList<List<String>>();
+        }
+        HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+        Arrays.sort(strs);
+        for(String s : strs){
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String keystr = String.valueOf(chars);
+            if(!map.containsKey(keystr)){ // All the s in the strs should be inseted into the map at the end of the algorithm
+                map.put(keystr, new ArrayList<String>());
+            }
+            map.get(keystr).add(s);
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+}
