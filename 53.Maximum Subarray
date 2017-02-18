@@ -1,0 +1,26 @@
+//-----TLE------
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        int max=nums[0];
+        int[] dp = new int[nums.length]; //dp[i] means the maximum subarray ending with nums[i], the maximum subarray not ending with nums[i] has already be stored in max. Thus the dp[i] means the current local optimization, the max means the current global optimization, and when the i becomes nums.length-1, we can get the overall global optimization. 
+        dp[0]=nums[0];
+        for(int i=1;i<nums.length;i++){
+            dp[i]=nums[i]+(dp[i-1]>0?dp[i-1]:0); //if dp[i-1]<=0, we will let the front sub array to be the local optimization, and keep going to find another local optimizatio using current element as the start point.
+            max=Math.max(max,dp[i]);
+        }
+        return max;
+    }
+}
+
+//-----Accepted-----O(n)--------
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        int max=nums[0];
+        int maxcur=nums[0];
+        for(int i=1;i<nums.length;i++){
+            maxcur=Math.max(maxcur+nums[i],nums[i]);//if the later one is maxcur, this algorithm will return the maximum of the discrete array of nums(which means the sum of all of the positive numbers in nums).
+            max=Math.max(max,maxcur);
+        }
+        return max;
+    }
+}
