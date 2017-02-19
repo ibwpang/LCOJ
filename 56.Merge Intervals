@@ -32,3 +32,72 @@ public class Solution {
         return res;
     }
 }
+
+//fast speed-------using Collection.sort and anonymous inner class to sort-----
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> res = new ArrayList<>();
+        int n = intervals.size();
+        if(n==1){
+            return intervals;
+        }
+        Collections.sort(intervals, new Comparator<Interval>(){ //using Collection's sort method and create an anonymous inner class
+            @Override
+            public int compare(Interval i1, Interval i2){
+                return i1.start-i2.start;
+            }
+        });
+        Interval prev = null;
+        for (Interval inter : intervals) {
+            if (  prev==null || inter.start>prev.end ) {
+                res.add(inter);
+                prev = inter;
+            } else if (inter.end>prev.end) {
+                // Modify the element already in list
+                prev.end = inter.end;
+            }
+        }
+        return res;
+    }
+}
+
+//slow speed-------using lambda comparator in Java 8 to sort List objects------
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> res = new ArrayList<>();
+        int n = intervals.size();
+        if(n==1){
+            return intervals;
+        }
+        intervals.sort((Interval i1, Interval i2)->Integer.compare(i1.start,i2.start));//i1 and i2 are two objects in the List: intervals.
+        Interval prev = null;
+        for (Interval inter : intervals) {
+            if (  prev==null || inter.start>prev.end ) {
+                res.add(inter);
+                prev = inter;
+            } else if (inter.end>prev.end) {
+                // Modify the element already in list
+                prev.end = inter.end;
+            }
+        }
+        return res;
+    }
+}
