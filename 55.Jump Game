@@ -1,0 +1,35 @@
+//-----beats 69%-----
+public class Solution {
+    public boolean canJump(int[] nums) {
+        int max = 0;
+        for(int i=0;i<nums.length;i++){
+            if(i>max){
+                return false;
+            }
+            max=nums[i]+i>max?nums[i]+i:max;
+        }
+        return true;
+    }
+}
+
+//-----beats 98%-----
+public class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums.length<2){
+            return true;
+        }
+        for(int i=nums.length-2;i>=0;i--){
+            if(nums[i]==0){
+                int needjump=1;
+                while(needjump>nums[i]){ //needjump>nums[i], you will have to check the former one in nums, whether it can break this condition.
+                    needjump++;
+                    i--;
+                    if(i<0){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
