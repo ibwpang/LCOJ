@@ -1,0 +1,41 @@
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        if(matrix.length==0){
+            return res;
+        }
+        int x=0;
+        int y=matrix[0].length-1;
+        int m=0;
+        int n=matrix.length-1;
+         
+        while(x<=y&&m<=n){  //this matrix may not be a square, so we cannot use layer to be the condition
+            for(int i=x;i<=y;i++){
+                res.add(matrix[m][i]);
+            }
+            m++;
+            
+            for(int i=m;i<=n;i++){
+                res.add(matrix[i][y]);
+            }
+            y--;
+            
+            if(m<=n){   //here we need to check the m and n. Intuitively, we need to check of x, y, but the for loop below can help us to check x and y automatically. however, if we don't check m, n, we will get wrong answer. so, the idea is that we need to guarantee that both the relationship of m,n and x,y are legal, when we traverse back(y->x, n->m).
+                for(int i=y;i>=x;i--){
+                    res.add(matrix[n][i]);
+                }
+            }
+            n--;
+            
+            if(x<=y){
+                for(int i=n;i>=m;i--){
+                    res.add(matrix[i][x]);
+                }
+            }
+            x++;
+        }
+        
+        return res;
+        
+    }
+}
