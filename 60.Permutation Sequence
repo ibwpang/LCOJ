@@ -1,4 +1,4 @@
-//------TLE-------
+//------TLE-------list all the permutations,straightforward but TLE.-------------
 public class Solution {
     public String getPermutation(int n, int k) {
         if(n==0||k==0){
