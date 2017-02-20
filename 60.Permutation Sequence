@@ -1,0 +1,30 @@
+//------TLE-------
+public class Solution {
+    public String getPermutation(int n, int k) {
+        if(n==0||k==0){
+            return null;
+        }
+        HashMap<Integer, String> map = new HashMap<Integer, String>();
+        backtrack(map, new ArrayList<Integer>(), n, 1);
+        return map.get(k);
+    }
+    
+    public void backtrack(HashMap<Integer, String> map, ArrayList<Integer> subres, int n, int start){
+        if(subres.size()==n){
+            StringBuffer sb = new StringBuffer();
+            for(int i:subres){
+                sb.append(i);
+            }
+            map.put(map.size()+1, sb.toString());
+            return;
+        }
+        for(int i=start;i<=n;i++){
+            if(!subres.contains(i)){
+                subres.add(i);
+                backtrack(map, subres, n, 1);
+                subres.remove(subres.size()-1);
+            }
+        }
+        return;
+    }
+}
