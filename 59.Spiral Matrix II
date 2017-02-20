@@ -1,0 +1,41 @@
+public class Solution {
+    public int[][] generateMatrix(int a) {
+        int[][] matrix = new int[a][a];
+        if(a==0){
+            return matrix;
+        }
+        int x=0;
+        int y=matrix.length-1;
+        int m=0;
+        int n=matrix[0].length-1;
+        int num=1;
+        int layer=0;
+        while(layer<=(matrix.length+1)/2){
+            for(int i=m;i<=n;i++){
+                matrix[x][i]=num;
+                num++;
+            }
+            x++;
+            for(int i=x;i<=y;i++){
+                matrix[i][n]=num;
+                num++;
+            }
+            n--;
+            if(m<=n&&x<=y){
+                for(int i=n;i>=m;i--){
+                    matrix[y][i]=num;
+                    num++;
+                }
+                y--;
+            
+                for(int i=y;i>=x;i--){
+                    matrix[i][m]=num;
+                    num++;
+                }
+                m++;
+            }
+            layer++;
+        }
+        return matrix;
+    }
+}
