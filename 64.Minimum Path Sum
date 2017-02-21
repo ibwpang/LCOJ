@@ -14,7 +14,7 @@ public class Solution {
                     grid[i][j]=grid[i-1][j]+grid[i][j];
                 }
                 else{
-                    grid[i][j]=grid[i-1][j]<grid[i][j-1]?grid[i-1][j]:grid[i][j-1]+grid[i][j];
+                    grid[i][j]=(grid[i-1][j]<grid[i][j-1]?grid[i-1][j]:grid[i][j-1]) + grid[i][j]; //must have parentheses.
                 }
             }
         }
