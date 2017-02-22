@@ -1,0 +1,22 @@
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        int len = digits.length;
+        //all 9 array
+        int j=0;
+        while(j<len&&digits[j]==9){
+            j++;
+        }
+        if(j==len){
+            int[] newdigits = new int[len+1];
+            newdigits[0]=1;
+            return newdigits;
+        }
+        //not all 9 array
+        digits[len-1]++;
+        for(int i=len-1;i>0;i--){
+            digits[i-1] = digits[i-1]+digits[i]/10;
+            digits[i]=digits[i]%10;
+        }
+        return digits;
+    }
+}
