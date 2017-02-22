@@ -1,0 +1,26 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+        StringBuffer sb = new StringBuffer();
+        int i=a.length()-1;
+        int j=b.length()-1;
+        int carry=0;
+        int curr=0;
+        while(i>=0||j>=0){
+            curr = carry;
+            if(i>=0){
+                curr += a.charAt(i)-'0';
+                i--;
+            }
+            if(j>=0){
+                curr += b.charAt(j)-'0';
+                j--;
+            }
+            sb.append(curr%2);
+            carry = curr/2;
+        }
+        if(carry!=0){
+            sb.append(carry);
+        }
+        return sb.reverse().toString();
+    }
+}
