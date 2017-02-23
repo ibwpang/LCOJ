@@ -1,0 +1,12 @@
+//Newton's method
+public class Solution {
+    public int mySqrt(int s) {
+        long x = s;
+        while(x*x>s){
+            x=(x+s/x)/2; 
+        }
+        return (int)x;
+    }
+}
+
+//Binary Search
