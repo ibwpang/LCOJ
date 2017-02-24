@@ -1,0 +1,55 @@
+//Space O(m+n) using bit vector
+public class Solution {
+    public void setZeroes(int[][] matrix) {
+        if(matrix.length==0||matrix[0].length==0){
+            return;
+        }
+        BitSet mbits = new BitSet(matrix.length);
+        BitSet nbits = new BitSet(matrix[0].length);
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    mbits.set(i,true);
+                    nbits.set(j,true);
+                }
+            }
+        }
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(mbits.get(i)==true||nbits.get(j)==true){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        return;
+    }
+}
+
+//space O(1), in space
+public class Solution {
+    public void setZeroes(int[][] matrix) {
+        if(matrix.length==0||matrix[0].length==0){
+            return;
+        }
+        int col0=1;
+        for(int i=0;i<matrix.length;i++){
+            if (matrix[i][0] == 0) 
+                col0 = 0;
+            for(int j=1;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        }
+        for(int i=matrix.length-1;i>=0;i--){
+            for(int j=matrix[0].length-1;j>=1;j--){
+                if(matrix[i][0]==0||matrix[0][j]==0){
+                    matrix[i][j]=0;
+                }
+            }
+            if (col0 == 0) matrix[i][0] = 0;
+        }
+        return;
+    }
+}
