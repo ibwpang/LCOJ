@@ -25,7 +25,7 @@ public class Solution {
     }
 }
 
-//----AC----
+//Backtrack----AC----
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -43,5 +43,28 @@ public class Solution {
             backtrack(res, templist, nums, i+1);
             templist.remove(templist.size()-1);
         }
+    }
+}
+
+//Bit manipulation----AC----
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+       Arrays.sort(nums);
+       int sets = (int)Math.pow(2, nums.length);
+       
+       //BitSet vector = new BitSet(nums.length);
+       List<List<Integer>> res = new ArrayList<>();
+       List<Integer> subset = new ArrayList<>();
+       
+       for(int i=0;i<sets;i++){
+            subset.clear();
+            for(int j=0;j<nums.length;j++){  //sets = 2^nums.length
+               if((((i>>j)&1)==1)?true:false){ //means bits_vector_of_i.get(j)==true, find the 1 in bits_vector_of_i
+                   subset.add(nums[j]);  //if based on my notes, nums.length-1-j will be more instinctive
+               }
+            }
+            res.add(new ArrayList<Integer>(subset));
+       }
+       return res;
     }
 }
