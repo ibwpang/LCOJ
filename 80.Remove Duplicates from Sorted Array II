@@ -1,0 +1,17 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length<=1){
+            return nums.length;
+        }
+        else{
+            int i = 0;
+            for(int j=0;j<nums.length;j++){
+                if(i<2||nums[j]!=nums[i-2]){ //Condition's order is important. if you can enter this if, it is Ok. if you not, it means there are >2 duplicates appear.
+                    nums[i] = nums[j];
+                    i++;
+                }
+            }
+            return i+1;
+        }
+    }
+}
