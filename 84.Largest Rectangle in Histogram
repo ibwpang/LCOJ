@@ -1,0 +1,21 @@
+//Using a stack to store the index of bars - O(n)
+public class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<Integer>();//used to find the "left" and "right index".
+        int maxArea = 0;
+        for(int i=0; i<=len; i++){
+            int h = (i==len?0:heights[i]);//This is a trick to implement the algorithm: when i==len we set h = 0, and this is not a actual bar, just an auxiliary.
+            if(stack.isEmpty()||h>=heights[stack.peek()]){
+                stack.push(i); //we push i, not heights[i].
+            }
+            else{
+                int rm = stack.pop();
+                int tempArea = heights[rm]*(stack.isEmpty()?i:i-1-stack.peek());//i is current bar's index
+                maxArea = maxArea>tempArea?maxArea:tempArea;
+                i--;  //back to the index of the popped item. 
+            } //The stack will always contain bars which are gradually higher along with the index.  
+        }
+        return maxArea;
+    }
+}
