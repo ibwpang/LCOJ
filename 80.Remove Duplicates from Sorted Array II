@@ -11,7 +11,7 @@ public class Solution {
                     i++;
                 }
             }
-            return i+1;
+            return i;//there is a i++ in the for loop, so don't need to +1.
         }
     }
 }
