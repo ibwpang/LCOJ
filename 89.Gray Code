@@ -1,0 +1,19 @@
+public class Solution {
+    int nums = 0; //int is passed by value, we can only defined it as member variable so that we can use it in different recursion level.
+    public List<Integer> grayCode(int n) {
+        List<Integer> list = new ArrayList<>();
+        backtrack(list, n);
+        return list;
+    }
+    
+    public void backtrack(List<Integer> list, int n){
+        if(n==0){
+            list.add(nums);
+        }
+        else{
+            backtrack(list,n-1);
+            nums=nums^(1<<n-1); // the << means 1 left shift n-1 bits, and ^ means XOR
+            backtrack(list,n-1);
+        }
+    }
+}
