@@ -1,0 +1,21 @@
+//DP
+public class Solution {
+    public int numDecodings(String s) {
+        int len = s.length();
+        if(len==0){
+            return 0;
+        }
+        int[] memotable = new int[len+1];
+        memotable[len] = 1;
+        memotable[len-1] = s.charAt(len-1)!='0'?1:0;
+        for(int i=len-2;i>=0;i--){
+            if(s.charAt(i)=='0'){
+                continue;
+            }
+            else{
+                memotable[i] = (Integer.parseInt(s.substring(i,i+2))<=26)?memotable[i+1]+memotable[i+2]:memotable[i+1]; //remember all char in string s are int numbers.
+            }
+        }
+        return memotable[0];
+    }
+}
