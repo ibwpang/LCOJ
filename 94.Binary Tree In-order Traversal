@@ -29,4 +29,21 @@ public class Solution {
     }
 }
 
-//Iteration
+//Recursion
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        inorder(root, res);
+        return res;
+    }
+    public void inorder(TreeNode cur, List<Integer> res){
+        if(cur!=null){
+            inorder(cur.left,res);
+            res.add(cur.val);
+            inorder(cur.right,res); 
+        }
+    }
+}
