@@ -1,3 +1,4 @@
+//Approach #1 - using substring()
 public class Solution {
     public int strStr(String haystack, String needle) {
        if(haystack.length()<needle.length()){
@@ -17,4 +18,20 @@ public class Solution {
     }
 }
 
-//KMP algorithm - sting searching algorithm with O(n)
+//Approach #2 - using two pointers - beat 8%
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        for (int i = 0; i<=haystack.length(); i++) {
+            for (int j = 0; j<=needle.length(); j++) {
+                //The order of this three if is very important.
+             if (j == needle.length())  //j==needle.length()-1 is not enough, cause the char at needle.length() has not been checked yet.
+                return i; //j is the pointer for needle. When this if is true, it means there is a needle in the haystack.
+             if (i + j >= haystack.length()) 
+                return -1; //i+j is the pointer for haystack. When this if is true, it means the haystack has already traversed over, but there is still not a needle find in haystack.
+             if (needle.charAt(j) != haystack.charAt(i + j)) 
+                break; //the first char of needle is not same as the i th char of haystack, so we skip to next char of haystack.
+            }
+        }
+        return 0;
+    }
+}
