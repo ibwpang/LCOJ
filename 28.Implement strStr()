@@ -1,4 +1,4 @@
-//Approach #1 - using substring()
+//Approach #1 - using substring() - beat 93%
 public class Solution {
     public int strStr(String haystack, String needle) {
        if(haystack.length()<needle.length()){
