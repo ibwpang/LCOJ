@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//Iteration - two stack - BFS
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if(root==null){
+            return list;
+        } 
+        
+        List<Integer> templist = new ArrayList<>();
+        
+        Stack<TreeNode> stack1 = new Stack<TreeNode>();
+        Stack<TreeNode> stack2 = new Stack<TreeNode>();
+        stack1.push(root);
+        
+        TreeNode node = root;
+        
+        while(!stack1.isEmpty()||!stack2.isEmpty()){
+            while(!stack1.isEmpty()){
+                node = stack1.pop();
+                templist.add(node.val);
+                if(node.left!=null){
+                    stack2.push(node.left);
+                }
+                if(node.right!=null){
+                    stack2.push(node.right);
+                }
+            }
+            if(!templist.isEmpty()){ //should use: isEmpty(), cannot use: !=null.
+                list.add(new ArrayList<Integer>(templist));
+                templist.clear(); 
+            }
+            
+            while(!stack2.isEmpty()){
+                node = stack2.pop();
+                templist.add(node.val);
+                if(node.right!=null){
+                    stack1.push(node.right);//right firstly. Opposite with stack1
+                }
+                if(node.left!=null){
+                    stack1.push(node.left); //left secondly
+                }
+            }
+            if(!templist.isEmpty()){
+                list.add(new ArrayList<Integer>(templist));
+                templist.clear();
+            }
+        }
+        return list;
+    }
+}
