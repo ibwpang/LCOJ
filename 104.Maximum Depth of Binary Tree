@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//---Recursion, DFS---beat 18%---
+public class Solution {
+    int countall = 0;
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int count = 1;
+        dfs(root, count);
+        return countall;
+    }
+    
+    public void dfs(TreeNode node, int count){
+        countall = countall<count?count:countall;
+        if(node.left!=null){
+            dfs(node.left, count+1);
+        }
+        if(node.right!=null){
+            dfs(node.right, count+1);
+        }
+    }
+}
