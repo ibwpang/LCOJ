@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//Recursion - Based on problem 104
+public class Solution {
+    
+    private boolean res = true; 
+    
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        helper(root);
+        return res;
+    }
+    
+    public int helper(TreeNode node){
+        if(node == null){
+            return 0;
+        }
+        int leftdepth = helper(node.left);
+        int rightdepth = helper(node.right);
+        if(Math.abs(leftdepth - rightdepth) > 1){
+            res = false;
+        }
+        return Math.max(leftdepth, rightdepth) + 1;
+    }
+}
