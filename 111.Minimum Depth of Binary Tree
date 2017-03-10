@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//DFS - Recursion - beat 2%, based on the problem 104.
+public class Solution {
+    public int minDepth(TreeNode root) {
+         if(root == null){
+            return 0;
+        }
+        int count = 1;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        dfs(root, count, list);
+        int countall = Integer.MAX_VALUE;
+        for(int n : list){
+            if(n<countall){
+                countall = n;
+            }
+        }
+        return countall;
+    }
+    
+    public void dfs(TreeNode node, int count, ArrayList<Integer> list){
+        if(node.left==null&&node.right==null){
+            list.add(count);
+        }
+        if(node.left!=null){
+            dfs(node.left, count+1, list);
+        }
+        if(node.right!=null){
+            dfs(node.right, count+1, list);
+        }
+    }
+}
