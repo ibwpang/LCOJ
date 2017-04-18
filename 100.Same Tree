@@ -7,7 +7,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
- //Recursion is more simple in this problem
+ //Recursion is a simpler solution for this problem.
 public class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if(p==null&&q==null){
