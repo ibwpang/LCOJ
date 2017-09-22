@@ -20,12 +20,7 @@ output: 0
 
 public class DeletionDistance {
 	/*
-	* Approach #1. DFS. (should be TLE). Time complexity: O(2^n ~ 2^m). Space complexity: O(n + m).
-	* 时间复杂度是O(2^n ~ 2^m).
-	* 为什么不是O(2^n)或者O(2^m)呢? 如果是的话, 那么递归结构应该是如下这种(见H-Tree):
-	* Min(helper(str1, start1 + 1), helper(str1, start1 + 1)); 
-	* 或
-	* Min(helper(str2, start2 + 1), helper(str2, start2 + 1));
+	* Approach #1. DFS. (should be TLE). Time complexity: O(2^(n+m)). Space complexity: O(n + m).
 	*/
 	public static int deletionDistance(String str1, String str2) {
 		return helper(str1, str2, 0, 0);
@@ -58,7 +53,6 @@ public class DeletionDistance {
 public class DeletionDistance {
 	/*
 	* Approach #2. Memorized Search. Time complexity: O(n*m) < O(?) < O(2^n ~ 2^m), Space complexity: O(n*m).
-	* It is hard to say what the time complexity is when we use prunning.
 	*/
 	public static int deletionDistance(String str1, String str2) {
 		//memo[i][j] means the deletion distance between str1.substring(i) and str2.substring(j).
@@ -101,7 +95,7 @@ public class DeletionDistance {
 
 public class DeletionDistance {
 	/*
-	* Approach #3-1. Multiple-iterations DP. Time complexity: O(n * m). Space complexity: O(n * m).
+	* Approach #3-1. DP. Time complexity: O(n * m). Space complexity: O(n * m).
 	*/
 	public static int deletionDistance(String str1, String str2) {
 		int len1 = str1.length();
