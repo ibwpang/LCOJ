@@ -52,7 +52,7 @@ public class DeletionDistance {
 
 public class DeletionDistance {
 	/*
-	* Approach #2. Memorized Search. Time complexity: O(n*m) < O(?) < O(2^n ~ 2^m), Space complexity: O(n*m).
+	* Approach #2. Memorized Search. Time complexity: O(n*m) < O(?) < O(2^(n+m)), Space complexity: O(n*m).
 	*/
 	public static int deletionDistance(String str1, String str2) {
 		//memo[i][j] means the deletion distance between str1.substring(i) and str2.substring(j).
