@@ -6,23 +6,22 @@
  *     ListNode(int x) { val = x; }
  * }
  */
-public class Solution {
+class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
-        ListNode cur = head;
-        while(cur!=null){
-            while(cur.next!=null&&cur.val==cur.next.val){
-                cur=cur.next;
+        ListNode curr = head;
+        ListNode prev = dummy;
+        while (curr != null) {
+            while (curr.next != null && curr.next.val == curr.val) {
+                curr = curr.next;
             }
-            if(pre.next==cur){   //IMPORTANT:This is NOT vals of the node equal, it is the reference equal!
-                pre=pre.next;
+            if (prev.next == curr) { // distinct node
+                prev = curr;
+            } else {
+                prev.next = curr.next;
             }
-            else{
-                pre.next = cur.next;
-            }
-            cur=cur.next;
+            curr = curr.next;
         }
         return dummy.next;
     }
