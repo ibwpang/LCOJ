@@ -1,0 +1,17 @@
+class Solution {
+    public boolean isHappy(int n) {
+        Set<String> set = new HashSet<>();
+        while (n != 1) {
+            String s = n + "";
+            if (set.contains(s)) {
+                break;
+            }
+            set.add(s);
+            n = 0;
+            for (char c : s.toCharArray()) {
+                n += Math.pow(c - '0', 2);
+            }
+        }
+        return n == 1;
+    }
+}
